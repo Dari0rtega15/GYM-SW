@@ -13,7 +13,7 @@ const Maquinas = ({ gymId }) => {
       if (!gymId) return;
 
       try {
-        console.log(`🔍 Buscando información del gimnasio con ID: ${gymId}`);
+        console.log(`Buscando información del gimnasio con ID: ${gymId}`);
 
         const gymDoc = await getDoc(doc(db, "Gimnasio", gymId));
 
@@ -24,7 +24,7 @@ const Maquinas = ({ gymId }) => {
           setGymName("Nombre no disponible");
         }
       } catch (error) {
-        console.error("❌ Error obteniendo datos del gimnasio:", error);
+        console.error("Error obteniendo datos del gimnasio:", error);
         setGymName("Error al obtener el gimnasio");
       }
     };
@@ -33,14 +33,14 @@ const Maquinas = ({ gymId }) => {
       if (!gymId) return;
 
       try {
-        console.log(`🔍 Buscando máquinas para el gimnasio con ID: ${gymId}`);
+        console.log(`Buscando máquinas para el gimnasio con ID: ${gymId}`);
 
         const gymMaquinaRef = collection(db, "GymMaquina");
         const q = query(gymMaquinaRef, where("idGym", "==", gymId));
         const gymMaquinaSnapshot = await getDocs(q);
 
         if (gymMaquinaSnapshot.empty) {
-          console.warn("⚠️ No hay máquinas registradas para este gimnasio.");
+          console.warn("No hay máquinas registradas para este gimnasio.");
           setMaquinas([]);
           return;
         }
@@ -54,19 +54,19 @@ const Maquinas = ({ gymId }) => {
           return { id: idMaquina, estado };
         });
 
-        console.log("🔄 Máquinas asociadas encontradas:", maquinaIds);
+        console.log("Máquinas asociadas encontradas:", maquinaIds);
 
         const maquinasPromises = maquinaIds.map(async (item) => {
           const maquinaDoc = await getDoc(doc(db, "Maquina", item.id));
 
           if (!maquinaDoc.exists()) {
-            console.warn(`⚠️ No se encontró la máquina con ID: ${item.id}`);
+            console.warn(`No se encontró la máquina con ID: ${item.id}`);
             return null;
           }
 
           const maquinaData = maquinaDoc.data();
 
-          console.log(`✅ Máquina obtenida de Firestore:`, maquinaData);
+          console.log(`Máquina obtenida de Firestore:`, maquinaData);
 
           return { ...maquinaData, estado: item.estado };
         });
@@ -111,7 +111,7 @@ const Maquinas = ({ gymId }) => {
                 </span>
 
                 <button className="toggle-info-btn" onClick={() => toggleInfo(index)}>
-                  ℹ️ Más Información
+                  Más Información
                 </button>
               </div>
 

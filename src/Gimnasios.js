@@ -31,7 +31,7 @@ const Gimnasios = ({ onSelectGym }) => {
           <div key={gym.id} className="gym-card">
             <h3>{gym.Nombre}</h3>
             <button className="location-btn" onClick={() => toggleLocation(gym.id)}>
-              📍 Ver Ubicación
+              Ver Ubicación
             </button>
             
             
